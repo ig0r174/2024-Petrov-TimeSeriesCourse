@@ -11,14 +11,17 @@ import plotly.express as px
 plotly.offline.init_notebook_mode(connected=True)
 
 
-def plot_ts(ts: np.ndarrray, title: str = 'Input Time Series') -> None:
+def plot_ts(ts, title='Input Time Series'):
     """
-    Plot the time series
+    Plot the time series.
 
     Parameters
     ----------
-    ts: time series
-    title: title of plot
+    ts : numpy.ndarrray
+        Time series.
+    
+    title : str, default = 'Input Time Series'
+        Title of plot.
     """
 
     n = ts.shape[0]
@@ -56,14 +59,17 @@ def plot_ts(ts: np.ndarrray, title: str = 'Input Time Series') -> None:
 
 
 
-def plot_motifs(mp: dict, top_k_motifs: dict) -> None:
+def plot_motifs(mp, top_k_motifs):
     """
-    Plot the top-k motifs in time series and matrix profile
+    Plot the top-k motifs in time series and matrix profile.
 
     Parameters
     ----------
-    mp: the matrix profile structure
-    top_k_motifs: top-k motifs
+    mp : dict
+        The matrix profile structure.
+
+    top_k_motifs : dict
+        Top-k motifs.
     """
 
     top_k = len(top_k_motifs['indices'])
@@ -99,6 +105,7 @@ def plot_motifs(mp: dict, top_k_motifs: dict) -> None:
         motifs_idx = list(top_k_motifs['indices'][i])
         color_i = i % len(px.colors.qualitative.Plotly)
         fig.add_trace(go.Scatter(x=motifs_idx, y=motifs_mp, mode='markers', marker=dict(symbol='star', color=px.colors.qualitative.Plotly[color_i], size=15), name=f"Top-{i+1} motifs"), row=2, col=1) # color='red',
+
 
     for i in range(top_k):
         col = int(i % num_cols) + 1
@@ -136,14 +143,17 @@ def plot_motifs(mp: dict, top_k_motifs: dict) -> None:
     fig.show(renderer="colab")
 
 
-def plot_discords(mp: dict, top_k_discords: dict) -> None:
+def plot_discords(mp, top_k_discords):
     """
-    Plot the top-k discords in time series and matrix profile
+    Plot the top-k discords in time series and matrix profile.
 
     Parameters
     ----------
-    mp: matrix profile structure
-    top_k_discords: top-k discords
+    mp : dict
+        Matrix profile structure.
+
+    top_k_discords : dict
+        Top-k discords.
     """
 
     top_k = len(top_k_discords['indices'])
@@ -193,14 +203,17 @@ def plot_discords(mp: dict, top_k_discords: dict) -> None:
     fig.show(renderer="colab")
 
 
-def plot_segmentation(mp: dict, threshold: float) -> None:
+def plot_segmentation(mp, threshold):
     """
     Plot the segmented time series
     
     Parameters
     ----------
-    mp: the matrix profile structure
-    threshold: threshold
+    mp : dict
+        The matrix profile structure.
+
+    threshold : float
+        Threshold.
     """
 
     n = len(mp['data']['ts1'])
