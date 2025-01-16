@@ -29,7 +29,7 @@ class TimeSeriesKNN:
             self.metric_params.update(metric_params)
 
 
-    def fit(self, X_train: np.ndarray, Y_train: np.ndarray) -> Self:
+    def fit(self, X_train: np.ndarray, Y_train: np.ndarray):
         """
         Fit the model using X_train as training data and Y_train as labels
 
@@ -37,12 +37,12 @@ class TimeSeriesKNN:
         ----------
         X_train: train set with shape (ts_number, ts_length)
         Y_train: labels of the train set
-        
+
         Returns
         -------
         self: the fitted model
         """
-       
+
         self.X_train = X_train
         self.Y_train = Y_train
 
@@ -52,12 +52,12 @@ class TimeSeriesKNN:
     def _distance(self, x_train: np.ndarray, x_test: np.ndarray) -> float:
         """
         Compute distance between the train and test samples
-        
+
         Parameters
         ----------
         x_train: sample of the train set
         x_test: sample of the test set
-        
+
         Returns
         -------
         dist: distance between the train and test samples
@@ -77,7 +77,7 @@ class TimeSeriesKNN:
         Parameters
         ----------
         x_test: sample of the test set
-        
+
         Returns
         -------
         neighbors: k nearest neighbors (distance between neighbor and test sample, neighbor label) for test sample

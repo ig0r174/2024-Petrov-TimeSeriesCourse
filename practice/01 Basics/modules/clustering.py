@@ -53,20 +53,30 @@ class TimeSeriesHierarchicalClustering:
         return linkage_matrix
 
 
-    def fit(self, distance_matrix: np.ndarray) -> Self:
+    def fit(self, distance_matrix: np.ndarray):
         """
         Fit the agglomerative clustering model based on distance matrix
 
         Parameters
         ----------
         distance_matrix: distance matrix between instances of dataset with shape (ts_number, ts_number)
-        
+
         Returns
         -------
         self: the fitted model
         """
 
-       # INSERT YOUR CODE
+         self.model = AgglomerativeClustering(
+            n_clusters=self.n_clusters,
+            metric='precomputed',
+            linkage=self.method,
+            compute_distances=True
+        )
+
+        self.model.fit(distance_matrix)
+
+        self.labels_ = self.model.labels_
+        self.linkage_matrix = self._create_linkage_matrix()
 
         return self
 
@@ -78,10 +88,10 @@ class TimeSeriesHierarchicalClustering:
         Parameters
         ----------
         distance_matrix: distance matrix between instances of dataset with shape (ts_number, ts_number)
-        
+
         Returns
         -------
-            predicted labels 
+            predicted labels
         """
 
         self.fit(distance_matrix)
@@ -90,7 +100,7 @@ class TimeSeriesHierarchicalClustering:
 
 
     def _draw_timeseries_allclust(self, dx: pd.DataFrame, labels: np.ndarray, leaves: list[int], gs: gridspec.GridSpec, ts_hspace: int) -> None:
-        """ 
+        """
         Plot time series graphs beside dendrogram
 
         Parameters
@@ -127,7 +137,7 @@ class TimeSeriesHierarchicalClustering:
 
 
     def plot_dendrogram(self, df: pd.DataFrame, labels: np.ndarray, ts_hspace: int = 12, title: str = 'Dendrogram') -> None:
-        """ 
+        """
         Draw agglomerative clustering dendrogram with timeseries graphs for all clusters.
 
         Parameters
